@@ -5,6 +5,11 @@ pipeline
         label 'master'
     }
 
+    environment
+    {
+        MAJOR_VERSION = 11
+    }
+
     options
     {
         buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '1'))
