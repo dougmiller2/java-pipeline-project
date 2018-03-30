@@ -11,9 +11,12 @@ pipeline
     {
         stage('Unit Tests')
         {
-            sh 'echo "Performing unit testing with junit"'
-            sh 'ant -f test.xml -v'
-            junit 'reports/result.xml'
+            steps
+            {
+                sh 'echo "Performing unit testing with junit"'
+                sh 'ant -f test.xml -v'
+                junit 'reports/result.xml'
+            }
         }
 
         stage('build')
