@@ -1,6 +1,9 @@
 pipeline
 {
-    agent any
+    agent
+    {
+        label 'master'
+    }
 
     options
     {
@@ -25,6 +28,15 @@ pipeline
             {
                 sh 'echo "Calling Ant to compile the source code"'
                 sh 'ant -f build.xml -v'
+            }
+        }
+
+        stage('deploy')
+        {
+            steps
+            {
+                sh 'echo "Deploying the software"'
+                sh 'cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/'
             }
         }
     }
