@@ -96,5 +96,19 @@ pipeline
                 sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 35 45"
             }
         }
+
+        stage('Promoting succesful project to Green')
+        {
+            agent
+            {
+                label 'apache'
+            }
+
+            steps
+            {
+                sh "echo 'All stages completed successfully.  Promoting rectangle_$env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar to Green.'"
+                sh "cp /var/www/html/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/green/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+            }
+        }
     }
 }
