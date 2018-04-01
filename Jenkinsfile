@@ -41,6 +41,14 @@ pipeline
                 sh 'echo "Calling Ant to compile the source code"'
                 sh 'ant -f build.xml -v'
             }
+
+            post
+            {
+                success
+                {
+                    archiveArtifacts artifacts: 'dist/*.jar', fingerprint: true
+                }
+            }
         }
 
         stage('deploy')
