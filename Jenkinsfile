@@ -4,7 +4,7 @@ pipeline
 
     environment
     {
-        MAJOR_VERSION = 11
+        MAJOR_VERSION = 12
     }
 
     options
