@@ -104,6 +104,11 @@ pipeline
                 label 'apache'
             }
 
+            when
+            {
+                branch 'development'
+            }
+
             steps
             {
                 sh "echo 'All stages completed successfully.  Promoting rectangle_$env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar to Green.'"
