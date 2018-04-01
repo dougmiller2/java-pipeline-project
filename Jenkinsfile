@@ -74,7 +74,7 @@ pipeline
 
             steps
             {
-                sh "wget http://doug-miller1.mylabserver.com/rectangles/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+                sh "wget http://doug-miller1.mylabserver.com/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 30 40"
             }
         }
