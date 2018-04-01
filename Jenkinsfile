@@ -1,9 +1,6 @@
 pipeline
 {
-    agent
-    {
-        label 'master'
-    }
+    agent none
 
     environment
     {
@@ -19,6 +16,11 @@ pipeline
     {
         stage('Unit Tests')
         {
+            agent
+            {
+                label 'apache'
+            }
+
             steps
             {
                 sh 'echo "Performing unit testing with junit"'
@@ -29,6 +31,11 @@ pipeline
 
         stage('build')
         {
+            agent
+            {
+                label 'apache'
+            }
+
             steps
             {
                 sh 'echo "Calling Ant to compile the source code"'
@@ -38,10 +45,29 @@ pipeline
 
         stage('deploy')
         {
+            agent
+            {
+                label 'apache'
+            }
+
             steps
             {
                 sh 'echo "Deploying the software"'
                 sh "cp dist/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar /var/www/html/rectangles/all/"
+            }
+        }
+
+        stage('Running on CentOS'
+        {
+            agent
+            {
+                label 'CentOS'
+            }
+
+            steps
+            {
+                sh "wget http://doug-miller1.mylabserver.com/rectangles/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+                sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 30 40"
             }
         }
     }
