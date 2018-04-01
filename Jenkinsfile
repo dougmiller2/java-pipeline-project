@@ -74,8 +74,26 @@ pipeline
 
             steps
             {
+                sh 'echo "Running the rectangle software on CentOS"'
+                sh 'echo using wget to download jar from apache server'
                 sh "wget http://doug-miller1.mylabserver.com/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
                 sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 30 40"
+            }
+        }
+
+        stage('Running on Debian in Docker Container')
+        {
+            agent
+            {
+                docker 'openjdk:8u161-jre'
+            }
+
+            steps
+            {
+                sh 'echo "Running on Debian in a Docker container"'
+                sh 'echo using wget to download jar from apache server'
+                sh "wget http://doug-miller1.mylabserver.com/rectangles/all/rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar"
+                sh "java -jar rectangle_${env.MAJOR_VERSION}.${env.BUILD_NUMBER}.jar 35 45"
             }
         }
     }
