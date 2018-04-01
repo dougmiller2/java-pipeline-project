@@ -85,7 +85,7 @@ pipeline
         {
             agent
             {
-                docker 'openjdk:8u161-jre'
+                docker 'openjdk:8u162-jre'
             }
 
             steps
