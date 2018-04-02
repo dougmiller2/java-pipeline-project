@@ -152,9 +152,7 @@ pipeline
             {
                 success
                 {
-                    emailext
-                    (
-                      subject: "Jenkins test subject",
+                    emailext(subject: "Jenkins test subject",
                       body: "Jenkins test body success promotion to Master",
                       to: "to_doug@hotmail.com"
                     )
