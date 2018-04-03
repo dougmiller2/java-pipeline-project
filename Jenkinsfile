@@ -14,6 +14,16 @@ pipeline
 
     stages
     {
+        stage('Greetings')
+        {
+            agent any
+
+            steps
+            {
+                sayHello 'You Magnificent Bastard!'
+            }
+        }
+
         stage('Unit Tests')
         {
             agent
